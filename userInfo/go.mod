@@ -8,7 +8,7 @@ require (
 
 )
 
-replace user v0.0.0 => ./userInfo/protobuf/user
+replace user v0.0.0 => ./protobuf/user
 
 require (
 	github.com/golang/protobuf v1.5.2 // indirect
