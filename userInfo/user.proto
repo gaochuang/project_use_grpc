@@ -1,0 +1,23 @@
+syntax="proto3"; //协议 proto2和proto3, syntax="proto3"必须位于文件顶部
+package user; //package 包名，生成的语言类放在什么包里
+
+//用于生成的.pb.go文件,在引用时和生成go包名时起作用
+option go_package = "./user";
+
+//会翻译成UserRequest结构体里面包含 id int32
+message UserRequest{
+    int32 id = 1;
+}
+
+//会翻译成UserResponse结构体，里面包含id int32和nanme string
+message UserResponse{
+    int32 id = 1;
+    string name = 2;
+}
+
+//定义service服务 会翻译为UserServiceClient 和 userServiceClient和对外暴露的 NewUserServiceClient供客户端调用
+//还会翻译为UserServiceServer接口(UserList方法在内 并且实现了UserList方法并且内部会去调用UserList方法) 和 
+//对外暴露的RegisterUserServiceServer 供服务端调用
+service UserService{
+    rpc getUser(UserRequest) returns (UserResponse){};
+}
